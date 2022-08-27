@@ -88,6 +88,11 @@ describe('Given I am connected as an Admin', () => {
       expect(handleShowTickets3).toHaveBeenCalled()
       await waitFor(() => screen.getByTestId(`open-billBeKy5Mo4jkmdfPGYpTxZ`) )
       expect(screen.getByTestId(`open-billBeKy5Mo4jkmdfPGYpTxZ`)).toBeTruthy()
+
+      //Reset folded in handleShowTickets
+      userEvent.click(icon1)
+      userEvent.click(icon2)
+      userEvent.click(icon3)
     })
   })
 
@@ -116,6 +121,11 @@ describe('Given I am connected as an Admin', () => {
       const iconEdit = screen.getByTestId('open-bill47qAXb6fIm2zOKkLzMro')
       userEvent.click(iconEdit)
       expect(screen.getByTestId(`dashboard-form`)).toBeTruthy()
+
+      //Reset folded in handleShowTickets
+      // console.log("Reset folded in handleShowTickets")
+      userEvent.click(iconEdit)
+      userEvent.click(icon1)
     })
   })
 
@@ -140,6 +150,7 @@ describe('Given I am connected as an Admin', () => {
       const icon1 = screen.getByTestId('arrow-icon1')
       icon1.addEventListener('click', handleShowTickets1)
       userEvent.click(icon1)
+
       expect(handleShowTickets1).toHaveBeenCalled()
       expect(screen.getByTestId(`open-bill47qAXb6fIm2zOKkLzMro`)).toBeTruthy()
       const iconEdit = screen.getByTestId('open-bill47qAXb6fIm2zOKkLzMro')

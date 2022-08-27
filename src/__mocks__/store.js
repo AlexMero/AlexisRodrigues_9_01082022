@@ -85,7 +85,7 @@ const mockedBills = {
 }
 
 export default {
-  bills() {
+  bills: () => {
     return mockedBills
     //return {}
   },

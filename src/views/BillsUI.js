@@ -20,13 +20,15 @@ const row = (bill) => {
   }
 
 const rows = (data) => {
-  return (data && data.length) ? data.map(bill => row(bill)).join("") : ""
+  if (data === undefined) return[];
+  const antiChrono = (a, b) => ((a.date < b.date) ? 1 : -1);
+  const sorted = data.sort(antiChrono);
+  return (data && data.length) ? sorted.map(bill => row(bill)).join("") : ""
 }
 
-export default ({ data: bills, loading, error }) => {
-  
-  const modal = () => (`
-    <div class="modal fade" id="modaleFile" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+export default ({data:bills, loading, error }) => {
+  const modal = () => (/*html*/`
+    <div class="modal fade" id="modaleFile" data-testid="modal-proof" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
         <div class="modal-content">
           <div class="modal-header">
@@ -48,7 +50,7 @@ export default ({ data: bills, loading, error }) => {
     return ErrorPage(error)
   }
   
-  return (`
+  return (/*html*/`
     <div class='layout'>
       ${VerticalLayout(120)}
       <div class='content'>
